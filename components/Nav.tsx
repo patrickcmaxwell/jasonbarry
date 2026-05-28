@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, navExtra, contact } from "@/lib/content";
+import { nav, contact } from "@/lib/content";
 import { Menu, X } from "lucide-react";
 
 export default function Nav() {
@@ -40,7 +40,7 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
-          {[...nav, ...navExtra].map((n) => {
+          {nav.map((n) => {
             const active = n.href === pathname;
             return (
               <li key={n.href}>
@@ -81,7 +81,7 @@ export default function Nav() {
       {open && (
         <div className="lg:hidden border-t border-[color:var(--color-line)] bg-[color:var(--color-bg)]">
           <ul className="px-6 py-5 grid gap-3">
-            {[...nav, ...navExtra].map((n) => (
+            {nav.map((n) => (
               <li key={n.href}>
                 <Link href={n.href} className="h-display block py-1.5 text-[18px] tracking-[0.04em] text-[color:var(--color-fg-dim)]">
                   {n.label}

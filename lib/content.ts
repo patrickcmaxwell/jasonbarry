@@ -20,11 +20,6 @@ export const nav = [
   { href: "/about-us", label: "About Jason" },
 ];
 
-export const navExtra = [
-  { href: "/junior-golf", label: "Junior Golf" },
-  { href: "/golf-lessons", label: "Golf Lessons" },
-];
-
 export const credentials = [
   { value: "11", label: "years college coaching" },
   { value: "5×", label: "Golf Digest Best Young Teacher" },

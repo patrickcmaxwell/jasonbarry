@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Cta from "@/components/Cta";
 import Reveal from "@/components/Reveal";
 import ScrollProgress from "@/components/ScrollProgress";
 import Counter from "@/components/Counter";
-import { aboutPara, credentials, contact } from "@/lib/content";
+import FitCallCta from "@/components/FitCallCta";
+import { credentials } from "@/lib/content";
 
 export const metadata = { title: "About · Jason Barry" };
 
@@ -12,9 +12,9 @@ export default function AboutPage() {
     <>
       <ScrollProgress />
 
-      {/* HERO — split: left photo (trophy) + Best Young Teachers badge, right copy */}
-      <section className="relative bg-black pt-28 lg:pt-32">
-        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 pt-12 pb-20 grid lg:grid-cols-12 gap-10 lg:gap-16">
+      {/* HERO — trophy + Best Young Teachers badge left, bio right */}
+      <section className="relative bg-black pt-28 lg:pt-36">
+        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 pt-12 pb-24 grid lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Left column */}
           <div className="lg:col-span-5">
             <div className="rise rise-1 relative overflow-hidden border border-[color:var(--color-line)] photo-shadow">
@@ -25,10 +25,10 @@ export default function AboutPage() {
                 height={937}
                 priority
                 className="w-full h-auto"
-                sizes="(min-width: 1024px) 600px, 100vw"
+                sizes="(min-width: 1024px) 560px, 100vw"
               />
             </div>
-            <div className="rise rise-3 mt-6 relative overflow-hidden border border-[color:var(--color-line)] bg-[color:var(--color-bg-elev)] p-4 max-w-xs">
+            <div className="rise rise-3 mt-6 relative overflow-hidden border border-[color:var(--color-line)] bg-[color:var(--color-bg-elev)] max-w-[260px]">
               <Image
                 src="/images/best-young-teacher.avif"
                 alt="Golf Digest Best Young Teachers 2025-2026"
@@ -42,7 +42,7 @@ export default function AboutPage() {
           {/* Right column */}
           <div className="lg:col-span-7 xl:col-span-6">
             <p className="rise rise-1 eyebrow text-[color:var(--color-fg-soft)]">Golf Digest Best Young Teachers</p>
-            <h1 className="rise rise-2 h-display-black mt-4 text-[60px] md:text-[100px] xl:text-[120px] leading-[0.86]">
+            <h1 className="rise rise-2 h-display-black mt-4 text-[60px] md:text-[100px] xl:text-[128px] leading-[0.86]">
               Meet Jason Barry
             </h1>
 
@@ -58,8 +58,8 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <Reveal delay={120}>
-              <p className="h-display-black mt-12 text-[24px] md:text-[32px] leading-[1.05] max-w-2xl">
+            <Reveal delay={150}>
+              <p className="h-display-black mt-12 text-[28px] md:text-[40px] leading-[1.05] max-w-2xl">
                 Recruiting success starts with clarity — and Jason helps families find it.
               </p>
             </Reveal>
@@ -67,58 +67,78 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* MY PHILOSOPHY — huge block header */}
-      <section className="relative bg-black border-t border-[color:var(--color-fg)]">
+      {/* MY PHILOSOPHY — body left + iron-setup photo right */}
+      <section className="relative bg-black border-t border-[color:var(--color-line)]">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-28">
           <p className="eyebrow text-[color:var(--color-fg-soft)]">Coaching credo</p>
-          <Reveal as="h2" className="h-display-black mt-4 text-[80px] md:text-[160px] xl:text-[200px] leading-[0.82]">
+          <Reveal as="h2" className="h-display-black mt-3 text-[72px] md:text-[160px] xl:text-[200px] leading-[0.82]">
             My Philosophy
           </Reveal>
 
-          <div className="mt-16 grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-7">
-              <Reveal as="blockquote" className="h-display text-[36px] md:text-[60px] leading-[0.95] max-w-[18ch]">
-                "College golf recruiting does not require pressure or promises. It requires perspective, planning, and honesty."
+          <div className="mt-16 grid lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-6 space-y-6 body text-[18px] text-[color:var(--color-fg-dim)] leading-relaxed">
+              <Reveal>
+                <p className="h-display text-[28px] md:text-[36px] leading-[1.1] text-[color:var(--color-fg)] max-w-[20ch] mb-8">
+                  &ldquo;College golf recruiting does not require pressure or promises. It requires perspective, planning, and honesty.&rdquo;
+                </p>
               </Reveal>
-              <p className="mono mt-8 text-[12px] uppercase tracking-[0.18em] text-[color:var(--color-fg-soft)]">— Jason Barry</p>
+              <Reveal delay={80}>
+                <p>
+                  Jason emphasizes three core principles: <strong>develop players who perform under competitive pressure</strong>, <strong>teach competitors to improve scoring practically</strong>, and <strong>provide coach-level perspective on college recruiting.</strong>
+                </p>
+              </Reveal>
+              <Reveal delay={140}>
+                <p>
+                  Rather than making promises or acting as an agent, Jason helps families by <strong>clarifying where players truly fit athletically</strong>, <strong>timing recruiting approaches appropriately</strong>, <strong>facilitating clear, professional communication</strong>, and <strong>supporting informed decision-making.</strong>
+                </p>
+              </Reveal>
+              <Reveal delay={200}>
+                <p>
+                  He specializes in Northeast recruiting, addressing region-specific challenges like shortened seasons, weather impacts, and academic emphasis across Division I, II, and III programs.
+                </p>
+              </Reveal>
             </div>
 
-            <div className="lg:col-span-5 lg:col-start-8 space-y-6 body text-[17px] text-[color:var(--color-fg-dim)] leading-relaxed">
-              {aboutPara.slice(1).map((p, i) => (
-                <Reveal key={i} delay={80 + i * 80}><p>{p}</p></Reveal>
-              ))}
+            <div className="lg:col-span-6">
+              <Reveal>
+                <div className="relative overflow-hidden border border-[color:var(--color-line)] photo-shadow aspect-[4/5]">
+                  <Image
+                    src="/images/iron-setup.jpg"
+                    alt="Jason at iron setup"
+                    fill
+                    sizes="(min-width: 1024px) 600px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CREDENTIALS STRIP */}
-      <section className="bg-black border-t border-[color:var(--color-line)]">
-        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)]">
+      {/* WHY BARRY COACHES PLAYERS — quick stats list */}
+      <section className="relative bg-black border-t border-[color:var(--color-line)]">
+        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-24">
+          <p className="eyebrow text-[color:var(--color-fg-soft)]">Why Barry coaches players</p>
+          <Reveal as="h2" className="h-display-black mt-3 text-[44px] md:text-[80px] xl:text-[96px] leading-[0.86]">
+            College and recruiting experience.
+          </Reveal>
+
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)]">
             {credentials.map((c) => (
               <div key={c.label} className="bg-black p-7">
-                <p className="h-display-black text-[56px] md:text-[80px] leading-none">
+                <p className="h-display-black text-[56px] md:text-[88px] leading-none">
                   {/^\d+/.test(c.value) ? <Counter value={parseInt(c.value)} suffix={c.value.replace(/^\d+/, "")} /> : c.value}
                 </p>
-                <p className="mt-3 eyebrow text-[color:var(--color-fg-soft)] leading-snug">
-                  {c.label}
-                </p>
+                <p className="mt-3 eyebrow text-[color:var(--color-fg-soft)] leading-snug">{c.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-black border-t border-[color:var(--color-fg)]">
-        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-24 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-          <h3 className="h-display-black text-[44px] md:text-[80px] leading-[0.86] max-w-2xl">
-            Find out where the player actually stands.
-          </h3>
-          <Cta href={contact.bookingUrl}>Book the Fit Call</Cta>
-        </div>
-      </section>
+      {/* FIT CALL CTA */}
+      <FitCallCta />
     </>
   );
 }

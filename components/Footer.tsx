@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { contact, nav, navExtra } from "@/lib/content";
+import { contact, nav } from "@/lib/content";
 import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 
 function IgIcon({ size = 16 }: { size?: number }) {
@@ -76,7 +76,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <p className="eyebrow text-[color:var(--color-fg-soft)]">Site</p>
             <ul className="mt-4 space-y-2">
-              {[...nav, ...navExtra].map((n) => (
+              {nav.map((n) => (
                 <li key={n.href}>
                   <Link href={n.href} className="ulink h-display text-[15px] tracking-[0.04em] text-[color:var(--color-fg-dim)] hover:text-[color:var(--color-fg)]">
                     {n.label}

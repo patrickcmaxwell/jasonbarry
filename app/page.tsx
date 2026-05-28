@@ -1,10 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import Cta from "@/components/Cta";
 import Counter from "@/components/Counter";
 import Reveal from "@/components/Reveal";
 import ScrollProgress from "@/components/ScrollProgress";
-import { credentials, idealFor, notProvides, provides, contact } from "@/lib/content";
+import Hero from "@/components/Hero";
+import FitCallCta from "@/components/FitCallCta";
+import { contact, credentials, provides, notProvides, idealFor } from "@/lib/content";
 import { Check } from "lucide-react";
 
 export default function Home() {
@@ -12,202 +13,164 @@ export default function Home() {
     <>
       <ScrollProgress />
 
-      {/* HERO — full-bleed photo with monolithic black blocks overlaid */}
-      <section className="relative min-h-[100svh] overflow-hidden">
-        {/* Photo */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/iron-setup.jpg"
-            alt="Jason Barry at setup"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[60%_30%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/45 to-black/0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/0 to-transparent" />
-          <div className="grain absolute inset-0 opacity-30 pointer-events-none" />
-        </div>
+      {/* HERO BANNER — full-bleed portrait-2 (IMG_5410) with overlaid copy */}
+      <Hero
+        src="/images/portrait-2.jpg"
+        alt="Jason Barry"
+        objectPosition="65% 25%"
+        eyebrow="Honest recruiting strategy"
+        headline={
+          <>
+            <span className="block">Former</span>
+            <span className="block">college coach.</span>
+            <span className="block">Honest recruiting</span>
+            <span className="block">strategy.</span>
+          </>
+        }
+        body={
+          <>
+            Strategic college golf recruiting guidance for families seeking clarity, fit, and a realistic path forward — without hype, pressure, or unrealistic promises.
+          </>
+        }
+        cta={<Cta href={contact.bookingUrl}>Schedule a Recruiting Fit Call</Cta>}
+      />
 
-        {/* Content */}
-        <div className="relative mx-auto max-w-[1600px] px-6 lg:px-10 pt-36 lg:pt-40 pb-24 grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7 xl:col-span-6">
-            <div className="rise rise-1 tag">
-              <span className="mono text-[11px]">2026 cycle — now booking</span>
-            </div>
-
-            <h1 className="h-display-black mt-8 text-[64px] sm:text-[96px] lg:text-[128px] xl:text-[148px]">
-              <span className="block rise rise-2">Former</span>
-              <span className="block rise rise-3">college coach.</span>
-              <span className="block rise rise-4">Honest recruiting</span>
-              <span className="block rise rise-5">strategy.</span>
-            </h1>
-
-            <p className="body rise rise-5 mt-8 max-w-xl text-lg text-[color:var(--color-fg-dim)]">
-              Strategic college golf recruiting guidance for families seeking clarity, fit, and a realistic path forward — without hype, pressure, or unrealistic promises.
-            </p>
-
-            <div className="rise rise-5 mt-10 flex flex-wrap items-center gap-4">
-              <Cta href={contact.bookingUrl}>Schedule a Recruiting Fit Call</Cta>
-              <Link href="/about-us" className="ulink h-display text-[15px] tracking-[0.06em] text-[color:var(--color-fg-dim)] hover:text-[color:var(--color-fg)]">
-                Meet Jason →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROBLEM STATEMENT — black with newspaper rule */}
+      {/* SECTION 01 — RECRUITING HAS BECOME INCREASINGLY CONFUSING FOR FAMILIES */}
       <section className="relative bg-black border-t border-[color:var(--color-line)]">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-28 grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-7">
             <p className="eyebrow text-[color:var(--color-fg-soft)]">01 · The problem</p>
-            <Reveal as="h2" className="h-display-black text-[44px] md:text-[72px] mt-3">
+            <Reveal as="h2" className="h-display-black mt-3 text-[44px] md:text-[88px] xl:text-[108px] leading-[0.86]">
               Recruiting has become increasingly confusing for families.
             </Reveal>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal delay={80} className="space-y-6 body text-[17px] text-[color:var(--color-fg-dim)] leading-relaxed">
+          <div className="lg:col-span-5">
+            <Reveal as="div" delay={100} className="relative overflow-hidden border border-[color:var(--color-line)] photo-shadow aspect-[4/5]">
+              <Image
+                src="/images/portrait-1.jpg"
+                alt="Jason coaching a player"
+                fill
+                sizes="(min-width: 1024px) 480px, 100vw"
+                className="object-cover"
+              />
+            </Reveal>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-1 -mt-4">
+            <Reveal delay={150} className="space-y-5 body text-[17px] text-[color:var(--color-fg-dim)] leading-relaxed max-w-2xl">
               <p>
-                Families struggle to understand <strong>competitive fit</strong>, <strong>recruiting timing</strong>, and how to plan a junior's path toward college golf. Bad advice is loud. Honest perspective is rare.
+                After more than a decade coaching college golf, Jason has seen how difficult it can be for families to understand where a player realistically fits, when to begin communication, and how to build a recruiting plan that aligns with both performance and long-term goals.
               </p>
               <p>
-                Jason provides <strong>honest evaluation</strong>, <strong>experienced perspective</strong>, and <strong>clear guidance</strong> throughout the recruiting process — without hype, pressure, or unrealistic promises.
+                His role is to provide <strong>honest evaluation</strong>, <strong>experienced perspective</strong>, and <strong>clear guidance</strong> throughout the recruiting process — without hype, pressure, or unrealistic promises.
               </p>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* EXPERIENCE & BACKGROUND — NCAA tee marker photo + stats */}
-      <section className="relative">
-        <div className="relative">
-          <Image
-            src="/images/NCAA-tee-markers.jpg"
-            alt="NCAA tee markers"
-            width={2048}
-            height={1330}
-            className="w-full h-[60svh] md:h-[70svh] object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="grain absolute inset-0 opacity-30 pointer-events-none" />
-
-          <div className="absolute inset-0">
-            <div className="mx-auto max-w-[1600px] h-full px-6 lg:px-10 flex flex-col justify-center">
-              <p className="eyebrow text-[color:var(--color-fg-soft)]">02 · Experience & background</p>
-              <Reveal as="h2" className="h-display-black text-[44px] md:text-[88px] mt-3 max-w-[16ch] leading-[0.86]">
-                Eleven years inside college golf. Five Best Young Teacher honors.
-              </Reveal>
-
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line-strong)] max-w-3xl">
-                {credentials.map((c) => (
-                  <div key={c.label} className="bg-black p-5">
-                    <p className="h-display-black text-[44px] md:text-[56px] leading-none">
-                      {/^\d+/.test(c.value) ? <Counter value={parseInt(c.value)} suffix={c.value.replace(/^\d+/, "")} /> : c.value}
-                    </p>
-                    <p className="mt-2 eyebrow text-[color:var(--color-fg-soft)] leading-snug">
-                      {c.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT THIS ADVISORY PROVIDES — two column block layout */}
+      {/* SECTION 02 — EXPERIENCE & BACKGROUND with putting green photo */}
       <section className="relative bg-black border-t border-[color:var(--color-line)]">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-28">
-          <div className="grid lg:grid-cols-12 gap-12 mb-16">
+          <div className="grid lg:grid-cols-12 gap-12 mb-14">
             <div className="lg:col-span-6">
-              <p className="eyebrow text-[color:var(--color-fg-soft)]">03 · What this provides</p>
-              <Reveal as="h2" className="h-display-black text-[44px] md:text-[72px] mt-3 leading-[0.86]">
-                A coach's perspective — strategic, not tactical.
+              <p className="eyebrow text-[color:var(--color-fg-soft)]">02 · Experience & background</p>
+              <Reveal as="h2" className="h-display-black mt-3 text-[44px] md:text-[88px] xl:text-[108px] leading-[0.86]">
+                Eleven years inside the college game.
               </Reveal>
             </div>
             <div className="lg:col-span-5 lg:col-start-8">
-              <p className="body text-[17px] text-[color:var(--color-fg-dim)] leading-relaxed">
-                Not technical instruction or placement service. Strategic advisory grounded in how college coaches actually evaluate players. Honest, structured, and built around the player in front of us.
-              </p>
+              <Reveal delay={100}>
+                <ul className="body space-y-3 text-[17px] text-[color:var(--color-fg-dim)]">
+                  <li className="border-t border-[color:var(--color-line)] pt-3 flex items-start gap-3"><span className="mono text-[12px] text-[color:var(--color-fg-soft)] mt-1">·</span> <span><strong>11 years</strong> of college coaching experience</span></li>
+                  <li className="border-t border-[color:var(--color-line)] pt-3 flex items-start gap-3"><span className="mono text-[12px] text-[color:var(--color-fg-soft)] mt-1">·</span> <span>Former <strong>Rider University Men's Golf Coach</strong></span></li>
+                  <li className="border-t border-[color:var(--color-line)] pt-3 flex items-start gap-3"><span className="mono text-[12px] text-[color:var(--color-fg-soft)] mt-1">·</span> <span><strong>Conference Championship</strong> & multiple NCAA Regional appearances</span></li>
+                  <li className="border-t border-[color:var(--color-line)] pt-3 flex items-start gap-3"><span className="mono text-[12px] text-[color:var(--color-fg-soft)] mt-1">·</span> <span><strong>5× Golf Digest Best Young Teacher</strong></span></li>
+                </ul>
+              </Reveal>
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[color:var(--color-line)] border-y border-[color:var(--color-line)]">
-            {provides.map((p, i) => (
-              <Reveal key={p} delay={i * 50} className="bg-black p-7 lg:p-9">
-                <p className="mono text-[11px] text-[color:var(--color-fg-soft)]">{String(i + 1).padStart(2, "0")}</p>
-                <p className="h-display mt-3 text-[24px] leading-[1.05]">{p}</p>
-              </Reveal>
+          {/* Stat strip */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)]">
+            {credentials.map((c) => (
+              <div key={c.label} className="bg-black p-7">
+                <p className="h-display-black text-[56px] md:text-[80px] leading-none">
+                  {/^\d+/.test(c.value) ? <Counter value={parseInt(c.value)} suffix={c.value.replace(/^\d+/, "")} /> : c.value}
+                </p>
+                <p className="mt-3 eyebrow text-[color:var(--color-fg-soft)] leading-snug">{c.label}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* WHAT THIS IS NOT — inverted cream block, brutalist callout */}
-      <section className="relative bg-[color:var(--color-paper)] text-black">
-        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-24">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-              <p className="eyebrow text-black/55">What this is NOT</p>
-              <Reveal as="h2" className="h-display-black text-[36px] md:text-[56px] mt-3 leading-[0.88]">
-                We don't do placement. We don't do promises.
+      {/* SECTION 03 — WHAT THIS ADVISORY PROVIDES (two columns: this is / this is not) */}
+      <section className="relative bg-black border-t border-[color:var(--color-line)]">
+        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-28">
+          <div className="grid lg:grid-cols-12 gap-12 mb-14">
+            <div className="lg:col-span-6">
+              <p className="eyebrow text-[color:var(--color-fg-soft)]">03 · What this advisory provides</p>
+              <Reveal as="h2" className="h-display-black mt-3 text-[44px] md:text-[88px] xl:text-[108px] leading-[0.86]">
+                What this is — and is not.
               </Reveal>
             </div>
-            <div className="lg:col-span-7">
-              <ul className="space-y-3 body text-[18px]">
-                {notProvides.map((n, i) => (
-                  <Reveal key={n} delay={i * 60} as="li" className="flex items-start gap-4 border-t border-black/15 pt-4">
-                    <span className="h-display text-[24px] text-black/40 leading-none w-8 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                    <span>{n}</span>
-                  </Reveal>
+          </div>
+
+          {/* IS vs IS NOT — with huge JB watermark in the middle */}
+          <div className="relative grid lg:grid-cols-2 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)]">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.08]">
+              <Image src="/images/jb-mark.png" alt="" width={520} height={520} className="w-[360px] md:w-[520px] h-auto" />
+            </div>
+
+            <Reveal className="relative bg-black p-10 lg:p-14">
+              <p className="eyebrow text-[color:var(--color-fg)]">This advisory IS:</p>
+              <ul className="mt-7 space-y-4 body text-[17px]">
+                {provides.map((p) => (
+                  <li key={p} className="flex items-start gap-3 border-t border-[color:var(--color-line)] pt-4">
+                    <Check size={16} className="mt-1 text-[color:var(--color-fg)] shrink-0" />
+                    <span className="text-[color:var(--color-fg-dim)]">{p}</span>
+                  </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
+
+            <Reveal delay={120} className="relative bg-black p-10 lg:p-14">
+              <p className="eyebrow text-[color:var(--color-accent)]">This advisory IS NOT:</p>
+              <ul className="mt-7 space-y-4 body text-[17px]">
+                {notProvides.map((p) => (
+                  <li key={p} className="flex items-start gap-3 border-t border-[color:var(--color-line)] pt-4">
+                    <span className="mt-2 inline-block h-px w-3 bg-[color:var(--color-fg-soft)] shrink-0" />
+                    <span className="text-[color:var(--color-fg-dim)]">{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* WHO THIS IS FOR */}
-      <section className="bg-black border-t border-[color:var(--color-line)]">
+      {/* SECTION 04 — WHO THIS IS FOR */}
+      <section className="bg-[color:var(--color-paper)] text-black">
         <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-28">
-          <div className="grid lg:grid-cols-12 gap-12 mb-12">
-            <div className="lg:col-span-6">
-              <p className="eyebrow text-[color:var(--color-fg-soft)]">04 · Who this is for</p>
-              <Reveal as="h2" className="h-display-black text-[44px] md:text-[72px] mt-3 leading-[0.86]">
-                Built for families who want the truth.
-              </Reveal>
-            </div>
-          </div>
+          <p className="eyebrow text-black/55">04 · Who this is for</p>
+          <Reveal as="h2" className="h-display-black mt-3 text-[44px] md:text-[88px] xl:text-[108px] leading-[0.86]">
+            Built for families who want the truth.
+          </Reveal>
 
-          <ul className="grid gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)]">
+          <ul className="mt-14 grid gap-px bg-black/15 border border-black/15">
             {idealFor.map((line, i) => (
-              <Reveal key={line} delay={i * 50} as="li" className="bg-black flex items-center gap-6 px-6 lg:px-10 py-6 lg:py-7 hover:bg-[color:var(--color-bg-elev)] transition-colors">
-                <span className="h-display-black text-[32px] md:text-[44px] text-[color:var(--color-fg-soft)] w-14 shrink-0 leading-none">{String(i + 1).padStart(2, "0")}</span>
-                <span className="h-display text-[20px] md:text-[28px] leading-[1.05]">{line}</span>
-                <Check size={20} className="ml-auto text-[color:var(--color-fg-soft)] shrink-0" />
+              <Reveal key={line} delay={i * 50} as="li" className="bg-[color:var(--color-paper)] flex items-center gap-6 px-6 lg:px-10 py-6 lg:py-7">
+                <span className="h-display-black text-[32px] md:text-[56px] text-black/30 w-14 shrink-0 leading-none">{String(i + 1).padStart(2, "0")}</span>
+                <span className="h-display text-[20px] md:text-[32px] leading-[1.05]">{line}</span>
+                <Check size={20} className="ml-auto text-black/40 shrink-0" />
               </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* FINAL CTA — bold sport-mag callout */}
-      <section className="relative border-t border-[color:var(--color-fg)] bg-black">
-        <div className="mx-auto max-w-[1600px] px-6 lg:px-10 py-24 lg:py-32">
-          <p className="eyebrow text-[color:var(--color-accent)]">Recruiting fit assessment</p>
-          <Reveal as="h2" className="h-display-black text-[60px] md:text-[120px] xl:text-[160px] mt-4 leading-[0.84] max-w-[14ch]">
-            One call. Honest answer. Real path forward.
-          </Reveal>
-          <div className="mt-12 flex flex-wrap items-center gap-6">
-            <Cta href={contact.bookingUrl}>Book the Fit Call</Cta>
-            <a href={`mailto:${contact.email}`} className="ulink h-display text-[15px] tracking-[0.06em] text-[color:var(--color-fg-dim)] hover:text-[color:var(--color-fg)]">
-              Or email Jason directly →
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* FIT CALL CTA */}
+      <FitCallCta />
     </>
   );
 }
