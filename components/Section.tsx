@@ -9,6 +9,7 @@ export function Section({
   tone = "dark",
   align = "default",
   divider = true,
+  size = "default",
 }: {
   eyebrow?: string;
   num?: string;
@@ -18,6 +19,7 @@ export function Section({
   tone?: "dark" | "deep" | "paper";
   align?: "default" | "center";
   divider?: boolean;
+  size?: "default" | "compact" | "wide";
 }) {
   const bg =
     tone === "paper"
@@ -28,30 +30,33 @@ export function Section({
 
   const eyebrowCls = tone === "paper" ? "eyebrow text-black/55" : "eyebrow";
 
+  const pad = size === "compact" ? "py-20 lg:py-28" : "py-24 lg:py-36";
+  const titleCls = size === "wide" ? "section-h2-statement" : "section-h2";
+
   return (
     <section className={`relative ${bg} ${divider ? "rule" : ""}`}>
-      <div className="mx-auto max-w-[1480px] px-6 lg:px-12 py-28 lg:py-40">
+      <div className={`mx-auto max-w-[1400px] px-6 lg:px-12 ${pad}`}>
         {(eyebrow || title) && (
-          <header className={align === "center" ? "max-w-3xl mx-auto text-center" : "max-w-5xl"}>
+          <header className={align === "center" ? "max-w-3xl mx-auto text-center" : "max-w-4xl"}>
             {eyebrow && (
               <p className={eyebrowCls}>
-                {num && <span className="mr-3 mono">{num}</span>}
-                {eyebrow}
+                {num && <span className={tone === "paper" ? "eyebrow-num text-black/40" : "eyebrow-num"}>{num}</span>}
+                <span>{eyebrow}</span>
               </p>
             )}
             {title && (
-              <Reveal as="h2" className="section-h2 mt-5">
+              <Reveal as="h2" className={`${titleCls} mt-5`}>
                 {title}
               </Reveal>
             )}
             {intro && (
-              <Reveal delay={100} className="body mt-7 max-w-2xl text-[15px] leading-[1.75] text-[color:var(--color-fg-dim)]">
+              <Reveal delay={100} className="body mt-6 max-w-2xl text-[15px] leading-[1.75]">
                 {intro}
               </Reveal>
             )}
           </header>
         )}
-        {children && <div className={(eyebrow || title) ? "mt-16 lg:mt-20" : ""}>{children}</div>}
+        {children && <div className={(eyebrow || title) ? "mt-12 lg:mt-16" : ""}>{children}</div>}
       </div>
     </section>
   );

@@ -1,15 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  /* Darker, cleaner palette */
-  --color-bg: #000000;
-  --color-bg-elev: #07070a;
-  --color-bg-deep: #0c0c10;
+  --color-bg: #050505;
+  --color-bg-elev: #0a0a0c;
+  --color-bg-deep: #0e0e12;
   --color-fg: #fafaf5;
-  --color-fg-dim: rgba(250, 250, 245, 0.66);
-  --color-fg-soft: rgba(250, 250, 245, 0.36);
-  --color-line: rgba(250, 250, 245, 0.09);
-  --color-line-strong: rgba(250, 250, 245, 0.20);
+  --color-fg-dim: rgba(250, 250, 245, 0.72);
+  --color-fg-soft: rgba(250, 250, 245, 0.40);
+  --color-line: rgba(250, 250, 245, 0.08);
+  --color-line-strong: rgba(250, 250, 245, 0.18);
   --color-accent: #d33421;
   --color-paper: #ece5d1;
   --font-display: var(--font-anton);
@@ -18,39 +17,67 @@
 }
 
 html, body { background: var(--color-bg); color: var(--color-fg); }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection { background: var(--color-fg); color: var(--color-bg); }
 
-/* DISPLAY — Anton, bold edgy condensed athletic */
+/* DISPLAY — Anton. Now properly scaled. */
 .h-display {
   font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: 0.92;
+  line-height: 1.0;
   text-transform: uppercase;
 }
-.h-display-tight {
+
+/* Hero headline — capped at 4.5rem (72px) so it supports the photo, doesn't fight it */
+.hero-headline {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.86;
+  letter-spacing: -0.005em;
+  line-height: 0.96;
   text-transform: uppercase;
+  font-size: clamp(2.4rem, 3.8vw, 4.5rem);
 }
+
+/* Standard section H2 — capped at 3.25rem (52px) */
+.section-h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.0;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+}
+
+/* Statement headline — when we want a moment, capped at 4rem */
+.section-h2-statement {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  font-size: clamp(2.25rem, 3.5vw, 4rem);
+}
+
+/* Subhead — sans, not caps */
 .subhead {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.15;
-  text-transform: none;
+  line-height: 1.35;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  color: var(--color-fg);
 }
+
 .eyebrow {
   font-family: var(--font-sans);
   font-weight: 600;
@@ -58,62 +85,56 @@ body {
   letter-spacing: 0.18em;
   font-size: 0.72rem;
   color: var(--color-fg-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
-.eyebrow-accent {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--color-accent);
+}
+.eyebrow-num {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--color-fg-soft);
   font-size: 0.72rem;
-  color: var(--color-accent);
+  margin-right: 12px;
 }
+
 .body {
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: 0.98rem;
+  color: var(--color-fg-dim);
 }
-.body strong { font-weight: 700; color: var(--color-fg); }
+.body strong { font-weight: 600; color: var(--color-fg); }
 .mono { font-family: var(--font-mono); letter-spacing: 0.04em; }
-
-/* Standardized section H2 — used across every page */
-.section-h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 0.88;
-  text-transform: uppercase;
-  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
-}
-.section-h2-xl {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.86;
-  text-transform: uppercase;
-  font-size: clamp(3rem, 8vw, 8.5rem);
-}
 
 /* Grain overlay */
 .grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
-/* Above-fold reveal */
+/* Above-fold rise — subtler, snappier */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(22px); }
+  from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.rise { animation: rise 0.95s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 .rise-1 { animation-delay: 0.05s; }
-.rise-2 { animation-delay: 0.18s; }
-.rise-3 { animation-delay: 0.32s; }
-.rise-4 { animation-delay: 0.48s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.28s; }
+.rise-4 { animation-delay: 0.42s; }
+.rise-5 { animation-delay: 0.58s; }
 
 /* Marquee */
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-track { animation: marquee 44s linear infinite; }
+.marquee-track { animation: marquee 48s linear infinite; }
 
 /* Underline link */
 .ulink {
@@ -125,33 +146,56 @@ body {
 }
 .ulink:hover { background-size: 0% 1px; background-position: 100% 100%; }
 
-/* Hard newspaper drop shadow on photos */
-.photo-shadow { box-shadow: 0 44px 88px -32px rgba(0,0,0,0.75); }
+/* Photo treatment */
+.photo-shadow { box-shadow: 0 50px 90px -36px rgba(0,0,0,0.78); }
+.photo-edge { border: 1px solid var(--color-line-strong); }
 
-/* Section divider rule */
+/* Rule */
 .rule { border-top: 1px solid var(--color-line); }
+
+/* Hero scrim card — used inside hero photo to give copy a dark glass surface */
+.scrim {
+  background: linear-gradient(135deg, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.70) 60%, rgba(0,0,0,0.0) 100%);
+}
 
 /* Tag chip */
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border: 1px solid var(--color-line-strong);
-  padding: 6px 12px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  padding: 7px 14px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--color-fg);
 }
 .tag::before {
   content: "";
   display: block;
-  width: 6px;
-  height: 6px;
+  width: 5px; height: 5px;
   background: var(--color-accent);
+  border-radius: 999px;
+  box-shadow: 0 0 0 3px rgba(211, 52, 33, 0.18);
 }
+
+/* Floating decorative JB */
+@keyframes jb-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(8px, -6px, 0) rotate(2deg); }
+}
+.jb-drift { animation: jb-drift 14s ease-in-out infinite; }
+
+/* Smooth scroll cue */
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(10px); opacity: 0.3; }
+}
+.scroll-cue { animation: scroll-cue 2s ease-in-out infinite; }
 
 /* Focus */
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
