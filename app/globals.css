@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 @theme {
+  /* Darker, cleaner palette */
   --color-bg: #000000;
-  --color-bg-elev: #0d0d0d;
-  --color-fg: #f4ede0;
-  --color-fg-dim: rgba(244, 237, 224, 0.72);
-  --color-fg-soft: rgba(244, 237, 224, 0.42);
-  --color-line: rgba(244, 237, 224, 0.14);
-  --color-line-strong: rgba(244, 237, 224, 0.28);
-  --color-accent: #c33a2a;
-  --color-paper: #ebe4d2;
-  --font-display: var(--font-teko);
-  --font-sans: var(--font-cambay);
+  --color-bg-elev: #07070a;
+  --color-bg-deep: #0c0c10;
+  --color-fg: #fafaf5;
+  --color-fg-dim: rgba(250, 250, 245, 0.66);
+  --color-fg-soft: rgba(250, 250, 245, 0.36);
+  --color-line: rgba(250, 250, 245, 0.09);
+  --color-line-strong: rgba(250, 250, 245, 0.20);
+  --color-accent: #d33421;
+  --color-paper: #ece5d1;
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-inter-tight);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -19,49 +21,86 @@ html, body { background: var(--color-bg); color: var(--color-fg); }
 
 body {
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection { background: var(--color-fg); color: var(--color-bg); }
 
-/* HEAVY DISPLAY TYPE (Teko) */
+/* DISPLAY — Anton, bold edgy condensed athletic */
 .h-display {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.005em;
-  line-height: 0.88;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
   text-transform: uppercase;
 }
-.h-display-black {
+.h-display-tight {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.005em;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 0.86;
   text-transform: uppercase;
 }
+.subhead {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-transform: none;
+}
 .eyebrow {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--color-fg-soft);
+}
+.eyebrow-accent {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--color-accent);
 }
 .body {
   font-family: var(--font-sans);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 .body strong { font-weight: 700; color: var(--color-fg); }
 .mono { font-family: var(--font-mono); letter-spacing: 0.04em; }
 
+/* Standardized section H2 — used across every page */
+.section-h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+}
+.section-h2-xl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 8vw, 8.5rem);
+}
+
 /* Grain overlay */
 .grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
-/* Reveal on mount (above-fold safe per Patrick's verify-visually rule) */
+/* Above-fold reveal */
 @keyframes rise {
   from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
@@ -71,21 +110,10 @@ body {
 .rise-2 { animation-delay: 0.18s; }
 .rise-3 { animation-delay: 0.32s; }
 .rise-4 { animation-delay: 0.48s; }
-.rise-5 { animation-delay: 0.62s; }
-
-/* Kinetic letter reveal for hero */
-@keyframes letter {
-  from { opacity: 0; transform: translateY(48px) rotateX(-30deg); }
-  to { opacity: 1; transform: translateY(0) rotateX(0); }
-}
-.letter { display: inline-block; transform-origin: 50% 100%; animation: letter 1.0s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 /* Marquee */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track { animation: marquee 40s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 44s linear infinite; }
 
 /* Underline link */
 .ulink {
@@ -97,13 +125,13 @@ body {
 }
 .ulink:hover { background-size: 0% 1px; background-position: 100% 100%; }
 
-/* Drop-shadow on heavy photo crops */
-.photo-shadow { box-shadow: 0 40px 80px -30px rgba(0,0,0,0.75); }
+/* Hard newspaper drop shadow on photos */
+.photo-shadow { box-shadow: 0 44px 88px -32px rgba(0,0,0,0.75); }
 
-/* Hard newspaper rule */
-.hard-rule { border-top: 1px solid var(--color-fg); height: 0; }
+/* Section divider rule */
+.rule { border-top: 1px solid var(--color-line); }
 
-/* Tag chip — sport magazine style */
+/* Tag chip */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -111,10 +139,10 @@ body {
   border: 1px solid var(--color-line-strong);
   padding: 6px 12px;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-family: var(--font-display);
+  letter-spacing: 0.16em;
+  font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--color-fg);
 }
 .tag::before {
@@ -126,6 +154,4 @@ body {
 }
 
 /* Focus */
-:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 3px; }
-
-/* No global motion-bg gradients anymore — brand is hard editorial */
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
