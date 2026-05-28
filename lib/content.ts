@@ -6,20 +6,23 @@ export const contact = {
   address: "1895 Clubhouse Drive, Princeton, NJ 08540",
   addressShort: "Princeton, NJ",
   club: "Springdale Golf Club",
-  clubLink:
-    "https://www.springdalegolfclub.com/page/golf-instruction",
+  clubLink: "https://www.springdalegc.org/about-us/personnel/jason-barry",
+  bookingUrl: "https://calendly.com/jasonbarrygolf",
   social: {
-    instagram: "https://instagram.com/",
-    facebook: "https://facebook.com/",
+    instagram: "#",
+    facebook: "#",
   },
 };
 
 export const nav = [
-  { href: "/", label: "Recruiting" },
-  { href: "/advisory-options", label: "Advisory" },
+  { href: "/", label: "College Consulting" },
+  { href: "/advisory-options", label: "Advisory Options" },
+  { href: "/about-us", label: "About Jason" },
+];
+
+export const navExtra = [
   { href: "/junior-golf", label: "Junior Golf" },
-  { href: "/golf-lessons", label: "Lessons" },
-  { href: "/about", label: "About Jason" },
+  { href: "/golf-lessons", label: "Golf Lessons" },
 ];
 
 export const credentials = [

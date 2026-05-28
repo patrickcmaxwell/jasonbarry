@@ -8,20 +8,21 @@ export default function Cta({
 }: {
   href: string;
   children: React.ReactNode;
-  tone?: "fg" | "amber" | "outline";
+  tone?: "fg" | "outline" | "accent";
 }) {
   const cls =
-    tone === "amber"
-      ? "bg-[color:var(--color-amber)] text-[color:var(--color-bg)] hover:bg-[color:var(--color-amber-hot)]"
+    tone === "accent"
+      ? "bg-[color:var(--color-accent)] text-white hover:bg-[color:var(--color-fg)] hover:text-[color:var(--color-bg)]"
       : tone === "outline"
-        ? "border border-[color:var(--color-line-strong)] text-[color:var(--color-fg)] hover:border-[color:var(--color-amber)] hover:text-[color:var(--color-amber)]"
-        : "bg-[color:var(--color-fg)] text-[color:var(--color-bg)] hover:bg-[color:var(--color-amber)]";
+        ? "border border-[color:var(--color-fg)] text-[color:var(--color-fg)] hover:bg-[color:var(--color-fg)] hover:text-[color:var(--color-bg)]"
+        : "bg-[color:var(--color-fg)] text-[color:var(--color-bg)] hover:bg-[color:var(--color-accent)] hover:text-white";
 
   const external = href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
 
   const inner = (
     <span
-      className={`group inline-flex items-center gap-3 rounded-full px-7 py-4 text-sm font-semibold tracking-tight transition-colors ${cls}`}
+      className={`group h-display inline-flex items-center gap-3 px-7 py-4 text-[16px] transition-colors ${cls}`}
+      style={{ letterSpacing: "0.04em" }}
     >
       {children}
       <span className="relative inline-block w-4 h-4 overflow-hidden">
@@ -32,9 +33,9 @@ export default function Cta({
   );
 
   return (
-    <Magnetic strength={0.18}>
+    <Magnetic strength={0.15}>
       {external ? (
-        <a href={href}>{inner}</a>
+        <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>{inner}</a>
       ) : (
         <Link href={href}>{inner}</Link>
       )}
