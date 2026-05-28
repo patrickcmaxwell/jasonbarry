@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
+  --color-bg: #0a0d10;
+  --color-bg-elev: #11161b;
+  --color-fg: #f4f1e8;
+  --color-fg-dim: rgba(244, 241, 232, 0.68);
+  --color-fg-soft: rgba(244, 241, 232, 0.42);
+  --color-line: rgba(244, 241, 232, 0.12);
+  --color-line-strong: rgba(244, 241, 232, 0.22);
+  --color-green: #4a7c4f;
+  --color-green-deep: #1f3a23;
+  --color-green-glow: #6fb074;
+  --color-amber: #d4a24c;
+  --color-amber-hot: #f3b94d;
+  --color-blue: #5b8bb8;
+  --color-cream: #f4f1e8;
+  --color-paper: #ece7d8;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+  --font-italic: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html, body { background: var(--color-bg); color: var(--color-fg); }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+::selection { background: var(--color-amber); color: var(--color-bg); }
+
+/* Brand mesh gradient — animated */
+.mesh {
+  background:
+    radial-gradient(60% 80% at 8% 12%, rgba(74, 124, 79, 0.32) 0%, transparent 60%),
+    radial-gradient(50% 70% at 92% 18%, rgba(212, 162, 76, 0.22) 0%, transparent 55%),
+    radial-gradient(70% 60% at 50% 100%, rgba(91, 139, 184, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0d10 0%, #0a0d10 100%);
+}
+
+.mesh-soft {
+  background:
+    radial-gradient(40% 60% at 80% 10%, rgba(212, 162, 76, 0.10) 0%, transparent 60%),
+    radial-gradient(60% 80% at 0% 100%, rgba(74, 124, 79, 0.10) 0%, transparent 60%);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(2%, -2%, 0) scale(1.04); }
+}
+.mesh-anim { animation: drift 18s ease-in-out infinite; }
+
+/* Grain overlay */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Type */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+}
+.italic-serif {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 400;
+}
+.mono { font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 36s linear infinite; }
+
+/* Reveal on mount (above-fold safe) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.18s; }
+.rise-3 { animation-delay: 0.32s; }
+.rise-4 { animation-delay: 0.48s; }
+
+/* Underline link */
+.ulink {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.ulink:hover { background-size: 0% 1px; background-position: 100% 100%; }
+
+/* Soft conic glow */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.conic-glow {
+  background: conic-gradient(from 0deg, #4a7c4f, #d4a24c, #5b8bb8, #4a7c4f);
+  animation: spin-slow 14s linear infinite;
+  filter: blur(40px);
+  opacity: 0.5;
+}
+
+/* Cursor blink */
+@keyframes blink { 50% { opacity: 0; } }
+.cursor { animation: blink 1.2s steps(2) infinite; }
+
+/* Focus ring */
+:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 3px; border-radius: 2px; }
