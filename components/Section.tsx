@@ -28,7 +28,7 @@ export function Section({
         ? "bg-[color:var(--color-bg-deep)] text-[color:var(--color-fg)]"
         : "bg-[color:var(--color-bg)] text-[color:var(--color-fg)]";
 
-  const eyebrowCls = tone === "paper" ? "eyebrow text-black/55" : "eyebrow";
+  const eyebrowCls = tone === "paper" ? "eyebrow text-black/70" : "eyebrow";
 
   const pad = size === "compact" ? "py-20 lg:py-28" : "py-24 lg:py-36";
   const titleCls = size === "wide" ? "section-h2-statement" : "section-h2";
@@ -40,7 +40,7 @@ export function Section({
           <header className={align === "center" ? "max-w-3xl mx-auto text-center" : "max-w-4xl"}>
             {eyebrow && (
               <p className={eyebrowCls}>
-                {num && <span className={tone === "paper" ? "eyebrow-num text-black/40" : "eyebrow-num"}>{num}</span>}
+                {num && <span className={tone === "paper" ? "eyebrow-num text-black/55" : "eyebrow-num"}>{num}</span>}
                 <span>{eyebrow}</span>
               </p>
             )}

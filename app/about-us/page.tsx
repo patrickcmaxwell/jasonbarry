@@ -29,9 +29,9 @@ export default function AboutPage() {
           <div className="lg:col-span-5">
             <Reveal>
               <ParallaxImage
-                src="/images/trophy.jpg"
-                alt="Jason Barry with championship trophy"
-                aspect="3/2"
+                src="/images/portrait-1.jpg"
+                alt="Jason Barry coaching a player on the course"
+                aspect="4/5"
                 sizes="(min-width: 1024px) 560px, 100vw"
                 amount={8}
               />

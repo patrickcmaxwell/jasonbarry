@@ -7,6 +7,9 @@ import AnimatedJB from "@/components/AnimatedJB";
 import ParallaxImage from "@/components/ParallaxImage";
 import { Section } from "@/components/Section";
 import { CheckList } from "@/components/CheckList";
+import { PointCard } from "@/components/PointCard";
+import { ServiceCard } from "@/components/ServiceCard";
+import { GraduationCap, Calendar, Flag, MessageSquare, UserCheck, Compass } from "lucide-react";
 import {
   contact,
   workHero,
@@ -93,56 +96,52 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* 03 ONGOING ADVISORY SUPPORT */}
+      {/* 03 ONGOING ADVISORY SUPPORT — service card grid */}
       <Section
         eyebrow="Ongoing advisory support"
         num="03"
         title={<>Tailored, not packaged.</>}
         intro={<>{ongoingAdvisory.intro}</>}
       >
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
-          <div className="lg:col-span-7">
-            <CheckList items={ongoingAdvisory.items} variant="check" cols={1} />
-          </div>
-          <div className="lg:col-span-5">
-            <Reveal>
-              <p className="h-display text-[22px] md:text-[28px] leading-[1.15] max-w-md">{ongoingAdvisory.closer}</p>
-            </Reveal>
-          </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          {ongoingAdvisory.items.map((title, i) => {
+            const icons = [GraduationCap, Calendar, Flag, MessageSquare, UserCheck, Compass];
+            const Icon = icons[i] ?? Compass;
+            return <ServiceCard key={title} num={i + 1} title={title} icon={Icon} delay={i * 60} />;
+          })}
         </div>
+        <Reveal delay={200} className="mt-12 max-w-2xl">
+          <p className="h-display text-[20px] md:text-[24px] leading-[1.15] text-[color:var(--color-fg)]">
+            {ongoingAdvisory.closer}
+          </p>
+        </Reveal>
       </Section>
 
-      {/* 04 FAMILIES I TYPICALLY WORK WITH — cream */}
+      {/* 04 FAMILIES I TYPICALLY WORK WITH — cream, card grid */}
       <Section
         eyebrow="Families I typically work with"
         num="04"
         title={<>The right fit, both ways.</>}
         tone="paper"
       >
-        <ul className="grid md:grid-cols-2 gap-x-12">
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
           {familiesIWorkWith.map((n, i) => (
-            <Reveal key={n} delay={i * 50} as="li" className="border-t border-black/15 py-5 flex items-start gap-4">
-              <span className="eyebrow-num text-black/40">{String(i + 1).padStart(2, "0")}</span>
-              <span className="body text-[16px] leading-[1.65] text-black/80">{n}</span>
-            </Reveal>
+            <PointCard key={n} num={i + 1} text={n} variant="fit" tone="paper" delay={i * 60} />
           ))}
-        </ul>
+        </div>
       </Section>
 
-      {/* 05 WHO THIS IS NOT FOR */}
+      {/* 05 WHO THIS IS NOT FOR — dark, card grid */}
       <Section
         eyebrow="Who this is not for"
         num="05"
         title={<>Honest about who this isn't for.</>}
       >
-        <ul className="grid md:grid-cols-2 gap-x-12">
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
           {whoThisIsNotFor.map((n, i) => (
-            <Reveal key={n} delay={i * 50} as="li" className="border-t border-[color:var(--color-line)] py-5 flex items-start gap-4">
-              <span className="eyebrow-num">{String(i + 1).padStart(2, "0")}</span>
-              <span className="body text-[16px] leading-[1.65]">{n}</span>
-            </Reveal>
+            <PointCard key={n} num={i + 1} text={n} variant="unfit" tone="dark" delay={i * 60} />
           ))}
-        </ul>
+        </div>
       </Section>
 
       {/* FINAL CTA */}

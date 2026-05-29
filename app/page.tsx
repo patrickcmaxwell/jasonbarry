@@ -7,8 +7,10 @@ import AnimatedJB from "@/components/AnimatedJB";
 import ParallaxImage from "@/components/ParallaxImage";
 import CredentialMarquee from "@/components/CredentialMarquee";
 import { Section } from "@/components/Section";
-import { CheckList } from "@/components/CheckList";
 import { StatCard } from "@/components/StatCard";
+import { PointCard } from "@/components/PointCard";
+import { ServiceCard } from "@/components/ServiceCard";
+import { Gauge, Compass, Calendar, Flag, MessageSquare, ClipboardCheck } from "lucide-react";
 import {
   homeHero,
   contact,
@@ -108,7 +110,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 03 WHAT THIS PROVIDES — with subtle animated JB watermark */}
+      {/* 03 WHAT THIS PROVIDES — service cards over JB watermark */}
       <section className="relative bg-[color:var(--color-bg-deep)] rule overflow-hidden">
         <AnimatedJB size={620} opacity={0.05} position="right" />
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12 py-24 lg:py-36">
@@ -116,43 +118,41 @@ export default function Home() {
             <p className="eyebrow"><span className="eyebrow-num">03</span>What this advisory provides</p>
             <Reveal as="h2" className="section-h2 mt-5">Strategic guidance, end to end.</Reveal>
           </header>
-          <div className="mt-12 lg:mt-16">
-            <CheckList items={whatThisProvides} variant="check" cols={2} />
+          <div className="mt-12 lg:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+            {whatThisProvides.map((title, i) => {
+              const icons = [Gauge, Compass, Calendar, Flag, MessageSquare, ClipboardCheck];
+              const Icon = icons[i] ?? Gauge;
+              return <ServiceCard key={title} num={i + 1} title={title} icon={Icon} delay={i * 60} />;
+            })}
           </div>
         </div>
       </section>
 
-      {/* 04 WHO THIS IS FOR — cream block for contrast */}
+      {/* 04 WHO THIS IS FOR — cream block, card grid */}
       <Section
         eyebrow="Who this is for"
         num="04"
         title={<>Built for families who want the truth.</>}
         tone="paper"
       >
-        <ul className="grid md:grid-cols-2 gap-x-12">
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
           {whoThisIsFor.map((n, i) => (
-            <Reveal key={n} delay={i * 50} as="li" className="border-t border-black/15 py-5 flex items-start gap-4">
-              <span className="eyebrow-num text-black/40">{String(i + 1).padStart(2, "0")}</span>
-              <span className="body text-[16px] leading-[1.65] text-black/80">{n}</span>
-            </Reveal>
+            <PointCard key={n} num={i + 1} text={n} variant="fit" tone="paper" delay={i * 60} />
           ))}
-        </ul>
+        </div>
       </Section>
 
-      {/* 05 WHO THIS IS NOT FOR */}
+      {/* 05 WHO THIS IS NOT FOR — dark, card grid */}
       <Section
         eyebrow="Who this is not for"
         num="05"
         title={<>Honest about who this isn't for.</>}
       >
-        <ul className="grid md:grid-cols-2 gap-x-12">
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
           {whoThisIsNotFor.map((n, i) => (
-            <Reveal key={n} delay={i * 50} as="li" className="border-t border-[color:var(--color-line)] py-5 flex items-start gap-4">
-              <span className="eyebrow-num">{String(i + 1).padStart(2, "0")}</span>
-              <span className="body text-[16px] leading-[1.65]">{n}</span>
-            </Reveal>
+            <PointCard key={n} num={i + 1} text={n} variant="unfit" tone="dark" delay={i * 60} />
           ))}
-        </ul>
+        </div>
       </Section>
 
       {/* FIT CALL CTA */}
